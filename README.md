@@ -11,6 +11,7 @@ To run the demo, do the following:
     `` docker compose up ``
 4. Browse (in web browser) to http://localhost:16686/ to see the traces in Jaeger.
 
-More details you can find here.
-
+Note:
+opentel directory contains a simple configuration of Jaeger and Opentel collector, to run it just run
+`` docker compose up `` in the opentel directory
 
