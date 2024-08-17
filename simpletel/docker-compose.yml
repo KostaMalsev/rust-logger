@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  simpletel:
+    image: simpletel:latest
+    environment:
+      - RUST_LOG=debug
+    volumes:
+      - ./example/simpletel/src:/app/src
+    depends_on:
+      - jaeger
+      
+  jaeger:
+      image: jaegertracing/all-in-one:latest
+      environment:
+        - COLLECTOR_OTLP_ENABLED=true
+      ports:
+        - "6831:6831/udp" # UDP port for Jaeger agent
+        - "16686:16686" # Web UI
+        - "14268:14268" # HTTP port for spans
+        - "4317:4317"
+
+
+volumes:
+  rust-app-data:
