@@ -50,7 +50,7 @@ async fn main() -> Result<(), TraceError> {
         let span = cx.span();
         let num = gen_number();
         span.add_event(
-            "Generating KOSTA Number".to_string(),
+            "opentel demo event Generating Number".to_string(),
             vec![Key::new("number").i64(num.into())],
         );
 

@@ -6,7 +6,7 @@ services:
     environment:
       - RUST_LOG=debug
     volumes:
-      - ./example/simpletel/src:/app/src
+      - ./src:/app/src
     depends_on:
       - jaeger
       
