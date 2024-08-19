@@ -6,20 +6,17 @@ ARG TARGETARCH
 RUN echo "export PATH=/usr/local/cargo/bin:$PATH" >> /etc/profile
 WORKDIR /app
 
-# install protobuf
-#RUN apt-get update && apt-get install -y protobuf-compiler libprotobuf-dev
-
 COPY ["./platform.sh", "./"]
 RUN ./platform.sh
 COPY ["./config", ".cargo/config"]
 RUN rustup target add $(cat /.platform)
 RUN apt-get update && apt-get install -y $(cat /.compiler)
 
-COPY ["./Cargo.toml", "./Cargo.lock", "./"]
+COPY ["./simpletel/Cargo.toml", "./Cargo.lock", "./"]
 
 RUN mkdir src && echo "fn main() {}" > src/main.rs && cargo build --release --target=$(cat /.platform)
 
-COPY ["./src", "./src"]
+COPY ["./simpletel/src", "./src"]
 
 RUN touch src/main.rs && cargo build --release --target=$(cat /.platform)
 
